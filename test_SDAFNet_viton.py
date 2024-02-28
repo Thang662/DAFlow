@@ -58,10 +58,10 @@ def test(opt, net):
             ref_input = torch.cat((pose, img_agnostic), dim=1)
             tryon_result = net(ref_input, cloth_img, img_agnostic).detach()
             for j in range(tryon_result.shape[0]):
-                save_image(tryon_result[j:j+1], os.path.join(opt.save_dir, opt.name, "vis_viton_out", img_names[j]), nrow=1, normalize=True, range=(-1,1))
+                save_image(tryon_result[j:j+1], os.path.join(opt.save_dir, opt.name, "vis_viton_out", img_names[j]), nrow=1, normalize=True, value_range=(-1,1))
             if opt.add_compare:
                 tryon_result = torch.cat([img_agnostic, cloth_img, tryon_result],2)
-                save_image(tryon_result, os.path.join(opt.save_dir, opt.name, "vis_viton_out", img_names[0]), nrow=10, normalize=True, range=(-1,1))
+                save_image(tryon_result, os.path.join(opt.save_dir, opt.name, "vis_viton_out_compare", img_names[0]), nrow=10, normalize=True, value_range=(-1,1))
 
 def main():
     opt = get_opt()
